@@ -54,6 +54,10 @@ public class PostController {
         context = "%"+context+"%";
         return postMapper.selectByContext(context);
     }
+    @GetMapping("/postid/select")
+    public List<Map<String,Object>> selectPostId(){
+        return postMapper.selectPostId();
+    }
 
     @GetMapping("/post/insert")
     public void insert(

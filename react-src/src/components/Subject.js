@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Board from "./Board";
 
-function SideSubject() {
+function SideSubject(props) {
     
     const [subject,setSubject] = useState([])
 
@@ -12,24 +12,22 @@ function SideSubject() {
     }
 
     useEffect(() => {
-        
-        }
+        getSubject();
+        },[]
     )
-    
-    getSubject();
 
     let print=[]
     subject.forEach(item => {
         print.push(
-            <div key={item.subject_id} className="subject_item" writer={item.writer}>
+            <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer} id={"board"+item.subject_id}>
                 {item.subject_name}
-                <Board subject={item.subject_id}/>
+                <Board subject={item.subject_id} loc={props.loc}/>
             </div>
         );
     });
 
     return(
-        <div className="subject">
+        <div className={props.loc+"SubjectContainer"}>
             {print}
         </div>
     );

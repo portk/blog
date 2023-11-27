@@ -6,7 +6,7 @@ function Home(props){
     return (
         <div className="Home">
             <div className="banner"></div>
-            <Subject subjectList={props.subject}/>
+            <Subject subjectList={props.subject} loc="home"/>
         </div>
     );
 }

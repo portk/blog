@@ -6,6 +6,10 @@
   display: flex;
 }
 
+.post_item{
+  cursor:pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

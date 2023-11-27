@@ -12,15 +12,13 @@ function Post(props){
     }
 
     useEffect(() => {
-        
-    });
+        getPost();
+    },[]);
 
-    getPost();
-
-    let printer=[]
+    let printer=[];
     post.forEach((item) => {
         printer.push(
-            <div className="postItem" key={item.post_id}>
+            <div className={"post_item "+props.loc+"_post"} key={item.post_id} id={"post"+item.post_id} onClick={()=>{window.location.href="http://localhost:3000/post"+item.post_id}}>
                 {item.post_title}
             </div>
         );

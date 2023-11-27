@@ -1,0 +1,31 @@
+/* .content {
+    width: 80vw;
+    min-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+.postTop{
+    display: flex;
+    align-items: center;
+}
+
+.postDetail{
+    width: 700px;
+}
+
+.context{
+    text-align: initial;
+    min-height: 400px;
+}
+
+.title{
+    width: 450px;
+    text-align: initial;
+}
+
+.postWriter{
+    width: 150px;
+    text-align: center;
+}

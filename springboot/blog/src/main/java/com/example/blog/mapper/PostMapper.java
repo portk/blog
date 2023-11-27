@@ -12,6 +12,7 @@ public interface PostMapper {
     public List<Map<String,Object>> selectByBoard(String board);
     public List<Map<String,Object>> selectByTitle(String title);
     public List<Map<String,Object>> selectByContext(String context);
+    public List<Map<String,Object>> selectPostId();
     public void insert(String board, String writer, String title, String context);
     public void update(String id, String board, String title, String context);
     public void delete(String id);

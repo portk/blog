@@ -19,6 +19,9 @@
     <select id="selectByContext">
         SELECT * FROM post WHERE post_context LIKE #{context}
     </select>
+    <select id="selectPostId">
+        SELECT post_id FROM post
+    </select>
     <insert id="insert">
         INSERT INTO post(board_id, writer, post_title, post_context) VALUES (#{board},#{writer},#{title},#{context})
     </insert>

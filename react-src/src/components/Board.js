@@ -13,18 +13,18 @@ function Board (props) {
     }
 
     useEffect(() => {
-        
-        }
+        getBoard();
+        },[]
     )
     
-    getBoard();
+    
 
     const printer=[]
     board.forEach((item) => {
         printer.push(
-            <div className="board_item" key={"board_"+item.board_id}>
+            <div className={"board_item "+props.loc+"_board"} key={"board_"+item.board_id} id={"board"+item.board_id}>
                 {item.board_name}
-                <Post board={item.board_id}/>
+                <Post board={item.board_id} loc={props.loc}/>
             </div>
         );
     })

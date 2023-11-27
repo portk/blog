@@ -9,6 +9,39 @@
     min-width: 900px;
 }
 
-.Home .subject {
+.homeSubjectContainer{
     display: flex;
+    align-items: initial;
+    justify-content: center;
+    width: 80vw;
+    min-width: 900px;
+    margin-top: 30px;
+    background-color: rgb(255, 205, 205);
+}
+
+.subject_item {
+    margin : 10px;
+}
+
+.home_subject {
+    margin:10px;
+    display: inline-block;
+    width: 500px;
+    border-left: 1px solid lightgrey;
+    border-right: 1px solid lightgrey;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.home_board {
+    margin:10px;
+    margin-bottom: 20px;
+    font-size: 23px;
+    font-weight:500;
+}
+
+.home_post{
+    margin:5px;
+    font-size: 20px;
+    font-weight: normal;
 }

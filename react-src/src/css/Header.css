@@ -10,5 +10,6 @@
     display: none;
     position:fixed;
     top:0px;
+    left:301px;
     border-bottom: 1px solid lightgray;
 }

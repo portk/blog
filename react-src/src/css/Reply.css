@@ -1,0 +1,15 @@
+.replyItem{
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+    border-bottom: 1px solid rgba(211, 211, 211, 0.5);
+}
+
+.replyWriter {
+    width: 150px;
+}
+
+.replyContext{
+    width: 450px;
+    text-align: initial;
+}
