@@ -1,0 +1,14 @@
+.banner {
+    width: 80vw;
+    height: 350px;
+    background-image:url("http://localhost:8080/img/banner.png");
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgb(215, 245, 255);
+    min-width: 900px;
+}
+
+.Home .subject {
+    display: flex;
+}

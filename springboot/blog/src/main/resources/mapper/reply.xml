@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.mapper.ReplyMapper">
+    <select id="selectBySubId">
+        SELECT * FROM reply WHERE sub_id=#{sub}
+    </select>
+    <select id="selectByPost">
+        SELECT * FROM reply WHERE post_id=#{post} AND sub_id IS NULL
+    </select>
+    <select id="selectByWriter">
+        SELECT * FROM reply WHERE writer=#{writer}
+    </select>
+    <insert id="insert">
+        INSERT INTO reply(post_id, writer, reply_context) VALUES(#{post},#{writer},#{context})
+    </insert>
+    <insert id="insertSub">
+        INSERT INTO reply(post_id, writer, reply_context, sub_id) VALUES(#{post},#{writer},#{context},#{sub_id})
+    </insert>
+    <update id="update">
+        UPDATE reply SET reply_context=#{context}, reply_date=NOW(), reply_modify=1 WHERE reply_id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM reply WHERE reply_id=#{id}
+    </delete>
+</mapper>

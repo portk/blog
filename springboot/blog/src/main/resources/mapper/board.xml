@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.mapper.BoardMapper">
+    <select id="select" resultType="java.util.Map">
+        SELECT * FROM board
+    </select>
+    <select id="selectById" resultType="java.util.Map">
+        SELECT * FROM board WHERE board_id=#{id}
+    </select>
+    <select id="selectBySubject" resultType="java.util.Map">
+        SELECT * FROM board WHERE subject_id=#{subject}
+    </select>
+    <select id="selectByWriter" resultType="java.util.Map">
+        SELECT * FROM board WHERE writer=#{wirter}
+    </select>
+    <select id="selectByName" resultType="java.util.Map">
+        SELECT * FROM board WHERE board_name LIKE #{name}
+    </select>
+    <insert id="insert">
+        INSERT INTO board(subject_id, writer, board_name) VALUES(#{subject},#{writer},#{name})
+    </insert>
+    <update id="update">
+        UPDATE board SET subject_id=#{subject}, board_name=#{name} WHERE board_id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM board WHERE board_id=#{id}
+    </delete>
+</mapper>

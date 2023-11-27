@@ -1,0 +1,14 @@
+.topNav {
+    display: flex;
+    width: 80vw;
+    height: 400px;
+    height: 50px;
+    min-width: 900px;
+    background-color: white;
+    align-items: center;
+    justify-content: space-between;
+    display: none;
+    position:fixed;
+    top:0px;
+    border-bottom: 1px solid lightgray;
+}

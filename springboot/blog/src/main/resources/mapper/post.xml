@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.mapper.PostMapper">
+    <select id="select">
+        SELECT * FROM post
+    </select>
+    <select id="selectById">
+        SELECT * FROM post WHERE post_id=#{id}
+    </select>
+    <select id="selectByWriter">
+        SELECT * FROM post WHERE writer=#{writer}
+    </select>
+    <select id="selectByBoard">
+        SELECT * FROM post WHERE board_id=#{board}
+    </select>
+    <select id="selectByTitle">
+        SELECT * FROM post WHERE post_title LIKE #{title}
+    </select>
+    <select id="selectByContext">
+        SELECT * FROM post WHERE post_context LIKE #{context}
+    </select>
+    <insert id="insert">
+        INSERT INTO post(board_id, writer, post_title, post_context) VALUES (#{board},#{writer},#{title},#{context})
+    </insert>
+    <update id="update">
+        UPDATE post SET board_id=#{board}, post_title=#{title}, post_context=#{context}, post_date=NOW(), post_modify=1 WHERE post_id=#{id}
+    </update>
+    <delete id="delete">
+        DELETE FROM post WHERE post_id=#{id}
+    </delete>
+</mapper>
