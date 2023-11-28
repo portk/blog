@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.blog.mapper.UserMapper;
 
 @RestController
@@ -30,45 +29,67 @@ public class UserController {
     public List<Map<String,Object>> userSelectById(
         @RequestParam String id
     ){
-        id='%'+id+'%';
         return userMapper.selectById(id);
     }
 
-    @GetMapping("/user/insert")
-    public void userInsert(
+    @GetMapping("/user/search/id")
+    public List<Map<String,Object>> userSearchById(
+        @RequestParam String id
+    ){
+        id='%'+id+'%';
+        return userMapper.selectById(id);
+    }
+    
+    @GetMapping("/user/select/idpw")
+    public List<Map<String,Object>> userSearchByIdPw(
         @RequestParam String id,
         @RequestParam String pw
     ){
-        userMapper.insert(id,pw);
+        return userMapper.selectByIdPw(id, pw);
+    }
+
+    @GetMapping("/user/insert")
+    public String userInsert(
+        @RequestParam String id,
+        @RequestParam String pw,
+        @RequestParam String nick,
+        @RequestParam String email
+    ){
+        userMapper.insert(id,pw,nick,email);
+        return "가입되었습니다.";
     }
 
     @GetMapping("/user/update")
-    public void userUpdate(
+    public String userUpdate(
         @RequestParam String code,
         @RequestParam String id,
         @RequestParam String pw
     ){
         userMapper.update(code, id, pw);
+        return "로그인 정보가 수정되었습니다.";
     }
     @GetMapping("/user/update/nick")
-    public void userUpdateNick(
+    public String userUpdateNick(
         @RequestParam String code,
         @RequestParam String nick
     ){
         userMapper.updateNickname(code, nick);
+        return "nickname이 수정되었습니다";
     }
     @GetMapping("/user/update/email")
-    public void userUpdateEmail(
+    public String userUpdateEmail(
         @RequestParam String code,
         @RequestParam String email
     ){
         userMapper.updateEmail(code, email);
+        return "Email 정보가 수정되었습니다.";
     }
 
     @GetMapping("/user/delete")
-    public void userDelete(
+    public String userDelete(
         @RequestParam String code
     ){
         userMapper.delete(code);
+        return "계정이 삭제되었습니다.";
     }
 }

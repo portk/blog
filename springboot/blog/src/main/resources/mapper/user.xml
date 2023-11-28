@@ -10,8 +10,11 @@
     <select id="selectById" resultType="java.util.Map">
         SELECT * FROM user WHERE id LIKE #{id}
     </select>
+    <select id="selectByIdPw" resultType="java.util.Map">
+        SELECT * FROM user WHERE id=#{id} AND pw=#{pw}
+    </select>
     <insert id="insert">
-        INSERT INTO user(id,pw) VALUES(#{id},#{pw})
+        INSERT INTO user(id,pw,nickname,email) VALUES(#{id},#{pw},#{nick},#{email})
     </insert>
     <update id="update">
         UPDATE user SET id=#{id}, pw=#{pw} WHERE code=#{code}

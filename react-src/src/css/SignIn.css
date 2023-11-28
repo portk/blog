@@ -1,0 +1,27 @@
+.signInText > span {
+    display: inline-block;
+    width: 40px;
+}
+
+.signInText > input {
+    width: 150px;
+}
+
+.signInForm {
+    display: flex;
+    border: 1px solid gray;
+    width: 350px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.signInText{
+    margin-right: 20px;
+}
+
+.signInButton{
+    width: 70px;
+    height: 40px;
+}

@@ -1,0 +1,30 @@
+.signUpForm {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+    width: 500px;
+    height: 250px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.signUpText{
+    line-height: 230%;
+}
+
+.signUpText > span {
+    display: inline-block;
+    width: 100px;
+}
+
+.signUpText > input {
+    width: 150px;
+    margin-right: 20px;
+}
+
+.signUpButton{
+    margin-top:20px;
+    width: 100px;
+    height: 30px;
+}
