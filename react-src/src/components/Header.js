@@ -14,9 +14,9 @@ function Header () {
     });
     return (
         <div className="topNav">
-            <div className="topLogo">이미지</div>
-            <div className="topTitle">제목</div>
-            <div className="logout">로그아웃버튼</div>
+            <div className="topLogo" onClick={() => {window.location.href = "http://localhost:3000"}}></div>
+            <div className="topTitle">Home</div>
+            <button type="button" className="logout">로그아웃</button>
         </div>
     );
 }

@@ -12,7 +12,9 @@ function PostDetail (props){
         setPost(response);
     };
 
-    useEffect(()=>{getPost()},[]);
+    useEffect(()=>{
+        getPost();
+    },[]);
     let printer=[]
     post.forEach((item) => {
         printer.push(
@@ -31,6 +33,7 @@ function PostDetail (props){
                 <Reply post={item.post_id}/>
             </div>
         )
+        document.querySelector(".topTitle").innerHTML=post[0].post_title;
     })
     
 

@@ -16,21 +16,37 @@ function SideSubject(props) {
         },[]
     )
 
-    let print=[]
-    subject.forEach(item => {
-        print.push(
-            <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer} id={"board"+item.subject_id}>
-                {item.subject_name}
-                <Board subject={item.subject_id} loc={props.loc}/>
+    let printer=[]
+
+    if (props.loc === "side"){
+        subject.forEach(item => {
+            printer.push(
+                <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer} id={props.loc+"_board_"+item.subject_id}
+                    onClick={()=> {props.transMode("board"); props.transCode(item.subject_id)}}>
+                    {item.subject_name}
+                </div>
+            );
+        }); 
+        return(
+            <div className={props.loc+"SubjectContainer"}>
+                {printer}
             </div>
         );
-    });
-
-    return(
-        <div className={props.loc+"SubjectContainer"}>
-            {print}
-        </div>
-    );
+    }else{
+        subject.forEach(item => {
+            printer.push(
+                <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer}>
+                    {item.subject_name}
+                    <Board subject={item.subject_id} loc={props.loc}/>
+                </div>
+            );
+        }); 
+        return(
+            <div className={props.loc+"SubjectContainer"}>
+                {printer}
+            </div>
+        );
+    }
 }
 
 export default SideSubject;

@@ -1,7 +1,7 @@
 .icon {
     background-image: url("http://localhost:8080/img/sideicon.png");
-    width:150px;
-    height:80px;
+    width:170px;
+    height:90px;
     background-size: 100% 100%;
     margin: 20px 20px;
     min-width: 150px;
@@ -22,10 +22,11 @@
 
 .side_subject{
     padding: 0;
-    font-size: 25px;
+    font-size: 23px;
     text-align: initial;
     margin: 10px 0;
-    font-weight: bold;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .side_board{
@@ -33,11 +34,25 @@
     text-align: initial;
     margin: 10px 0;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .side_post{
-    font-size: 20px;
+    font-size: 23px;
     text-align: initial;
     margin: 10px 0;
-    font-weight: normal;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.mode{
+    margin: 20px 0;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.mode > p {
+    font-size: 15px;
+    color:rgb(155, 155, 155)
 }
