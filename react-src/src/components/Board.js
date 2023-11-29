@@ -6,7 +6,7 @@ function Board (props) {
     const [board, setBoard] = useState([])
 
     const getBoard = async () => {
-        let url="http://localhost:8080/board/select/subject?subject="+props.subject;
+        let url= "http:"+props.access+":8080/board/select/subject?subject="+props.subject;
         const ajax = await fetch(url);
         const response = await ajax.json();
         setBoard(response);
@@ -23,7 +23,7 @@ function Board (props) {
         board.forEach((item) => {
             printer.push(
                 <div className={"board_item "+props.loc+"_board"} key={"board_"+item.board_id}
-                    onClick={()=>{props.transMode("post"); props.transCode(item.board_id)}}>
+                    onClick={()=>{props.transMode("post"); window.sessionStorage.setItem("sideBoard",item.board_id)}}>
                     {item.board_name}
                 </div>
             );
@@ -38,7 +38,7 @@ function Board (props) {
             printer.push(
                 <div className={"board_item "+props.loc+"_board"} key={"board_"+item.board_id} id={props.loc+"_board_"+item.board_id}>
                     {item.board_name}
-                    <Post board={item.board_id} loc={props.loc}/>
+                    <Post board={item.board_id} loc={props.loc} access={props.access}/>
                 </div>
             );
         })

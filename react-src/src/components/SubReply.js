@@ -4,7 +4,7 @@ function SubReply (props){
     const [subReply, setSubReply] = useState([])
     
     const getSubReply = async() => {
-        const url = "http://localhost:8080/reply/select/sub?sub="+props.reply_id;
+        const url = "http:"+props.access+":8080/reply/select/sub?sub="+props.reply_id;
         const ajax = await fetch(url);
         const response = await ajax.json();
         setSubReply(response);

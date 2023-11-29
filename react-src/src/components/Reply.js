@@ -6,7 +6,7 @@ function Reply (props){
     const [reply, setReply] = useState([])
 
     const getReply = async () => {
-        const url = "http://localhost:8080/reply/select/post?post="+props.post;
+        const url = "http:"+props.access+":8080/reply/select/post?post="+props.post;
         const ajax = await fetch(url);
         const response = await ajax.json();
         setReply(response);
@@ -25,7 +25,7 @@ function Reply (props){
                     <div className="date">{item.reply_date.slice(0,10)}</div>
                     <div className="time">{item.reply_date.slice(11,19)}</div>
                 </div>
-                <SubReply replyId={item.reply_id} />
+                <SubReply replyId={item.reply_id} access={props.access}/>
             </div>
         );
         

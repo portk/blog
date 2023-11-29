@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "../css/SignUp.css";
 
-function SignUp(){
+function SignUp(props){
     const [idChecked,setIdChecked] = useState(false);
 
     const idCheck = async () => {
-        const baseUrl="http://localhost:8080/user/select/id?id="
+        const baseUrl= "http:"+props.access+":8080/user/select/id?id="
         let id = document.querySelector("#userId").value;
         if(id !== "") {
             const url = baseUrl+id;
@@ -25,7 +25,7 @@ function SignUp(){
     
     const register = async () => {
         if(idChecked){
-            const baseUrl="http://localhost:8080/user/insert?"
+            const baseUrl= "http:"+props.access+":8080/user/insert?"
             let id = document.querySelector("#userId").value;
             let pw = document.querySelector("#userPw").value;
             let nick = ""
@@ -39,7 +39,8 @@ function SignUp(){
             if (pw !== "" && email !== ""){
                 const ajax = await fetch(url);
                 const response = await ajax.text();
-                alert(response);
+                alert(response+"\n가입된 계정을 통해 로그인하세요");
+                window.location.href="/"
             } else{
                 alert("서식을 모두 입력해주세요");
             }
@@ -49,21 +50,24 @@ function SignUp(){
     }
 
     return(
-        <form className="signUpForm">
-            <div className="signUpText">
-                <span>ID : </span>
-                <input type="text" name="id" id="userId" required/>
-                <button type="button" onClick={(e) => {idCheck()}}>중복확인</button><br/>
-                <span>PW : </span>
-                <input type="password" name="pw" id="userPw" required/><br/>
-                <span>nickname : </span>
-                <input type="text" name="nick" id="userNick" placeholder="미입력시 아이디와 동일"/><br/>
-                <span>Email : </span>
-                <input type="email" name="email" id="userEmail" required/><br/>
-            </div>
-            <input type="submit" className="signUpButton" value="가입하기" onClick={() => {register()}}/>
-        </form>
+        <div className="signUpBody">
+            <form className="signUpForm">
+                <div className="signUpText">
+                    <span>ID : </span>
+                    <input type="text" name="id" id="userId" required/>
+                    <button type="button" onClick={() => {idCheck()}}>중복확인</button><br/>
+                    <span>PW : </span>
+                    <input type="password" name="pw" id="userPw" required/><br/>
+                    <span>nickname : </span>
+                    <input type="text" name="nick" id="userNick" placeholder="미입력시 아이디와 동일"/><br/>
+                    <span>Email : </span>
+                    <input type="email" name="email" id="userEmail" required/><br/>
+                </div>
+                <input type="submit" className="signUpButton" value="가입하기" onClick={() => {register()}}/>
+            </form>
+        </div>
     )
+
 }
 
 export default SignUp;

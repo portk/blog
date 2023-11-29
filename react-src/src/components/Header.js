@@ -1,22 +1,15 @@
 import React, { useEffect } from "react";
 import "../css/Header.css";
 
-function Header () {
-    const handleScroll = () => {
-        if(window.scrollY > 0){
-            document.querySelector(".topNav").style.display="flex";
-        } else {
-            document.querySelector(".topNav").style.display="none";
-        }
-    }
+function Header (props) {
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+        document.querySelector(".topLogo").style.backgroundImage="url('http:"+props.access+":8080/img/icon.png')"
     });
     return (
         <div className="topNav">
-            <div className="topLogo" onClick={() => {window.location.href = "http://localhost:3000"}}></div>
+            <div className="topLogo" onClick={() => {window.location.href = "/"}}></div>
             <div className="topTitle">Home</div>
-            <button type="button" className="logout">로그아웃</button>
+            <button type="button" className="logout" onClick={()=>{window.sessionStorage.clear(); window.location.href="/"}}>로그아웃</button>
         </div>
     );
 }

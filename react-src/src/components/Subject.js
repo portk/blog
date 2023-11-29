@@ -6,7 +6,7 @@ function SideSubject(props) {
     const [subject,setSubject] = useState([])
 
     const getSubject = async () => { 
-        const ajax = await fetch("http://localhost:8080/subject/select");
+        const ajax = await fetch("http:"+props.access+":8080/subject/select");
         const response = await ajax.json();
         setSubject(response);
     }
@@ -22,7 +22,7 @@ function SideSubject(props) {
         subject.forEach(item => {
             printer.push(
                 <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer} id={props.loc+"_board_"+item.subject_id}
-                    onClick={()=> {props.transMode("board"); props.transCode(item.subject_id)}}>
+                    onClick={()=> {props.transMode("board"); window.sessionStorage.setItem("sideSubject",item.subject_id);}}>
                     {item.subject_name}
                 </div>
             );
@@ -37,7 +37,7 @@ function SideSubject(props) {
             printer.push(
                 <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer}>
                     {item.subject_name}
-                    <Board subject={item.subject_id} loc={props.loc}/>
+                    <Board subject={item.subject_id} loc={props.loc} access={props.access}/>
                 </div>
             );
         }); 

@@ -10,6 +10,14 @@
   cursor:pointer;
 }
 
+.content{
+  overflow: auto;
+  min-height: 10vh;
+  max-height: 90vh;
+  position:relative;
+  top:51px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

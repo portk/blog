@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.blog.mapper.UserMapper;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @CrossOrigin(origins = "*", methods = RequestMethod.GET)
 public class UserController {
@@ -40,12 +42,20 @@ public class UserController {
         return userMapper.selectById(id);
     }
     
-    @GetMapping("/user/select/idpw")
+    @GetMapping("/user/signin")
     public List<Map<String,Object>> userSearchByIdPw(
         @RequestParam String id,
-        @RequestParam String pw
+        @RequestParam String pw,
+        HttpSession session
     ){
-        return userMapper.selectByIdPw(id, pw);
+        List<Map<String,Object>> userData;
+        userData = userMapper.selectByIdPw(id, pw);
+        if (userData != null){
+            session.setAttribute("loginUser", userData);
+            return userData;
+        } else{
+            return null;
+        }
     }
 
     @GetMapping("/user/insert")
@@ -63,26 +73,12 @@ public class UserController {
     public String userUpdate(
         @RequestParam String code,
         @RequestParam String id,
-        @RequestParam String pw
-    ){
-        userMapper.update(code, id, pw);
-        return "로그인 정보가 수정되었습니다.";
-    }
-    @GetMapping("/user/update/nick")
-    public String userUpdateNick(
-        @RequestParam String code,
-        @RequestParam String nick
-    ){
-        userMapper.updateNickname(code, nick);
-        return "nickname이 수정되었습니다";
-    }
-    @GetMapping("/user/update/email")
-    public String userUpdateEmail(
-        @RequestParam String code,
+        @RequestParam String pw,
+        @RequestParam String nick,
         @RequestParam String email
     ){
-        userMapper.updateEmail(code, email);
-        return "Email 정보가 수정되었습니다.";
+        userMapper.update(code, id, pw, nick, email);
+        return "계정 정보가 수정되었습니다.";
     }
 
     @GetMapping("/user/delete")

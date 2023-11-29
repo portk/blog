@@ -6,7 +6,7 @@ function PostDetail (props){
     const [post, setPost] = useState([]);
     
     const getPost = async () => {
-        const url = "http://localhost:8080/post/select/id?id="+props.post_id;
+        const url = "http:"+props.access+":8080/post/select/id?id="+props.post_id;
         const ajax = await fetch(url)
         const response = await ajax.json();
         setPost(response);
@@ -30,7 +30,7 @@ function PostDetail (props){
                 <hr/>
                 <div className="context">{item.post_context}</div>
                 <hr/>
-                <Reply post={item.post_id}/>
+                <Reply post={item.post_id} access={props.access}/>
             </div>
         )
         document.querySelector(".topTitle").innerHTML=post[0].post_title;

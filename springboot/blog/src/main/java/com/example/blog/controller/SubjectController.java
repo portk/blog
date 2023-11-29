@@ -42,25 +42,28 @@ public class SubjectController {
     }
 
     @GetMapping("/subject/insert")
-    public void insert(
+    public String insert(
         @RequestParam String writer,
         @RequestParam String name
     ){
         subjectMapper.insert(writer, name);
+        return "입력되었습니다.";
     }
 
     @GetMapping("/subject/update")
-    public void update(
+    public String update(
         @RequestParam String id,
         @RequestParam String name
     ){
         subjectMapper.update(id, name);
+        return "수정되었습니다.";
     }
 
     @GetMapping("/subject/delete")
-    public void delete(
+    public String delete(
         @RequestParam String id
     ){
         subjectMapper.delete(id);
+        return "삭제되었습니다.";
     }
 }

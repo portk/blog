@@ -17,13 +17,7 @@
         INSERT INTO user(id,pw,nickname,email) VALUES(#{id},#{pw},#{nick},#{email})
     </insert>
     <update id="update">
-        UPDATE user SET id=#{id}, pw=#{pw} WHERE code=#{code}
-    </update>
-    <update id="updateNickname">
-        UPDATE user SET nickname=#{nick} WHERE code=#{code}
-    </update>
-    <update id="updateEmail">
-        UPDATE user SET email=#{email} WHERE code=#{code}
+        UPDATE user SET id=#{id}, pw=#{pw}, nickname=#{nick}, email=#{email} WHERE code=#{code}
     </update>
     <delete id="delete">
         DELETE FROM user WHERE code=#{code}

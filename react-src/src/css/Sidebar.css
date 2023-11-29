@@ -1,5 +1,4 @@
 .icon {
-    background-image: url("http://localhost:8080/img/sideicon.png");
     width:170px;
     height:90px;
     background-size: 100% 100%;
@@ -15,6 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     width: 300px;
     min-width: 300px;
     font-size:25px;
@@ -55,4 +55,25 @@
 .mode > p {
     font-size: 15px;
     color:rgb(155, 155, 155)
+}
+
+.sideContents {
+    height: 500px;
+    width: 200px;
+    line-height: 200%;
+    overflow: auto;
+}
+
+.moreSide{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width:200px
+}
+
+.moreSide > div{
+    border: 1px solid black;
+    width: 90px;
+    height: 70px;
+    cursor: pointer;
 }

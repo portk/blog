@@ -1,3 +1,10 @@
+.signUpBody {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
 .signUpForm {
     display: flex;
     flex-direction: column;

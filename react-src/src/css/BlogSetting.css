@@ -1,0 +1,22 @@
+.blogSettingBoard{
+    font-size: 30px;
+    line-height: 200%;
+}
+
+.blogSettingBoard > div {
+    cursor: pointer;
+    border: 1px solid black;
+    width: 500px;
+    height: 80px;
+    margin : 5px
+}
+
+.blogSettingBoard > div:hover{
+    background-color: lightcyan;
+}
+
+.subject_setting_item {
+    display: flex;
+    width:900px;
+    justify-content: space-around;
+}

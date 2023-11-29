@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../css/SignIn.css";
+import App from "./App";
 
-function SignIn (){
+function SignIn (props){
     const [userInfo, setUserInfo] = useState([])
 
     const check = async () =>{
-        const checkUrl="http://localhost:8080/user/select/idpw?";
+        const checkUrl="http:"+props.access+":8080/user/signin?";
         let id=document.getElementById("userId").value;
         let pw=document.getElementById("userPw").value;
         let url = checkUrl+"id="+id+"&pw="+pw
@@ -22,18 +23,27 @@ function SignIn (){
 
     if (userInfo.length < 1){
         return(
-            <form className="signInForm">
-                <div className="signInText">
-                    <span for="id">ID : </span>
-                    <input type="text" name="id" id="userId"/><br/>
-                    <span for="pw">PW : </span>
-                    <input type="password" name="pw" id="userPw"/>
+            <div className="signInBody">
+                <div className="signInPart">
+                    <form className="signInForm">
+                        <div className="signInText">
+                            <span>ID : </span>
+                            <input type="text" name="id" id="userId"/><br/>
+                            <span>PW : </span>
+                            <input type="password" name="pw" id="userPw"/>
+                        </div>
+                        <input className="signInButton" type="submit" value="로그인" onClick={(e) => {e.preventDefault(); check();}}/>
+                    </form>
+                    <p>사용중인 계정이 없으시다면? <a href="/signup">회원가입</a></p>
                 </div>
-                <input className="signInButton" type="submit" value="로그인" onClick={(e) => {e.preventDefault(); check();}}/>
-            </form>
+            </div>
         )
     } else{
-        return (<div>{userInfo.nickname}님 환영합니다.</div>)
+        window.sessionStorage.setItem("userCode", userInfo.code)
+        window.sessionStorage.setItem("userId", userInfo.id)
+        window.sessionStorage.setItem("userNickname", userInfo.nickname)
+        window.sessionStorage.setItem("userEmail", userInfo.email)
+        return (<App/>)
     }
 }
 

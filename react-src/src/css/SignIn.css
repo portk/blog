@@ -1,3 +1,10 @@
+.signInBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .signInText > span {
     display: inline-block;
     width: 40px;

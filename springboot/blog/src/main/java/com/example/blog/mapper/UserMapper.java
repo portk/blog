@@ -10,8 +10,6 @@ public interface UserMapper {
     public List<Map<String,Object>> selectById(String id);
     public List<Map<String,Object>> selectByIdPw(String id, String pw);
     public void insert(String id, String pw, String nick, String email);
-    public void update(String code, String id, String pw);
-    public void updateNickname(String code, String nick);
-    public void updateEmail(String code, String email);
+    public void update(String code, String id, String pw, String nick, String email);
     public void delete(String code);
 }
