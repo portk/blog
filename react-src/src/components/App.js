@@ -12,6 +12,7 @@ import BlogSetting from './BlogSetting';
 import SubjectSetting from './SubjectSetting';
 import BoardSetting from './BoardSetting';
 import PostSetting from './PostSetting';
+import PostDetailSetting from './PostDetailSetting';
 
 function App() {
   const [post, setPost] = useState([]);
@@ -60,6 +61,7 @@ function App() {
               <Route path="/subjectsetting" element={<SubjectSetting access={access} />}/>
               <Route path="/boardsetting" element={<BoardSetting access={access} />}/>
               <Route path="/postsetting" element={<PostSetting access={access} />}/>
+              <Route path="/PostDetailSetting" element={<PostDetailSetting access={access}/>}/>
             </Routes>
           </div>
         </div>

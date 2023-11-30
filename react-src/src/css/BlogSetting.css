@@ -15,8 +15,27 @@
     background-color: lightcyan;
 }
 
-.subject_setting_item {
+.setting_item, .settingListHeader, .ready_Subject_add, .add_ready {
     display: flex;
     width:900px;
     justify-content: space-around;
+}
+.settingListHeader {
+    margin-top: 10px;
+    margin-bottom:5px;
+}
+
+.subjectList > hr , .boardList > hr, .postList > hr{
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+.setting_item {
+    margin-bottom: 10px;
+}
+.setting_buttons > button{
+    margin-right: 10px;
+}
+
+.add_ready{
+    margin-bottom: 5px;
 }

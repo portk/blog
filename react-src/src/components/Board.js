@@ -21,18 +21,15 @@ function Board (props) {
 
     if (props.loc === "side" ){
         board.forEach((item) => {
-            printer.push(
-                <div className={"board_item "+props.loc+"_board"} key={"board_"+item.board_id}
-                    onClick={()=>{props.transMode("post"); window.sessionStorage.setItem("sideBoard",item.board_id)}}>
-                    {item.board_name}
-                </div>
-            );
+            if (props.loc === "side" ){    
+                printer.push(
+                    <div className={"board_item "+props.loc+"_board"} key={"board_"+item.board_id}
+                        onClick={()=>{props.transMode("post"); window.sessionStorage.setItem("sideBoard",item.board_id)}}>
+                        {item.board_name}
+                    </div>
+                );
+            }
         })
-        return(
-            <div className="board">
-                {printer}
-            </div>
-        );
     }else{
         board.forEach((item) => {
             printer.push(
@@ -42,11 +39,12 @@ function Board (props) {
                 </div>
             );
         })
-        return(
-            <div className="board">
-                {printer}
-            </div>
-        );
     }
+
+    return(
+        <div className="board">
+            {printer}
+        </div>
+    );
 }
 export default Board;

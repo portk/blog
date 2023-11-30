@@ -35,13 +35,15 @@ function AccountSetting(props){
     };
 
     const deleteAccount = async () => {
-        let url = "http:"+props.access+":8080/user/delete?code="+accountData.code;
-        const ajax = await fetch(url)
-        const response = await ajax.text();
-        alert(response);
-        window.sessionStorage.clear()
-        window.location.href="/";
+            if (window.confirm("계정을 삭제하시겠습니까?")){
+            let url = "http:"+props.access+":8080/user/delete?code="+accountData.code;
+            const ajax = await fetch(url)
+            const response = await ajax.text();
+            alert(response);
+            window.sessionStorage.clear()
+            window.location.href="/";
         }
+    }
 
     useEffect(() => {
         getAccountInfo();
@@ -68,12 +70,7 @@ function AccountSetting(props){
                         <button type="button" onClick={()=> {setAccountSettingMode("update");}}>
                             수정하기
                         </button>
-                        <button type="button" onClick={()=>{document.querySelector("#confirm_delete").style.display="block";}}>계정삭제</button>
-                    </div>
-                    <div className="delete_check" id="confirm_delete">
-                        <p>정말로 계정을 삭제하시겠습니까?</p>
-                        <button type="delete_check_button" onClick={()=>{deleteAccount()}}>삭제</button>
-                        <button type="delete_check_button" onClick={()=>{document.querySelector("#confirm_delete").style.display="none"}}>취소</button>
+                        <button type="button" onClick={()=>{deleteAccount();}}>계정삭제</button>
                     </div>
                 </div>
             );

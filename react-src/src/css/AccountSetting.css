@@ -1,7 +1,3 @@
 .account_item {
     display: flex;
 }
-
-.delete_check{
-    display: none;
-}

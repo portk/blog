@@ -26,13 +26,8 @@ function SideSubject(props) {
                     {item.subject_name}
                 </div>
             );
-        }); 
-        return(
-            <div className={props.loc+"SubjectContainer"}>
-                {printer}
-            </div>
-        );
-    }else{
+        });   
+    } else {
         subject.forEach(item => {
             printer.push(
                 <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer}>
@@ -41,12 +36,12 @@ function SideSubject(props) {
                 </div>
             );
         }); 
-        return(
-            <div className={props.loc+"SubjectContainer"}>
-                {printer}
-            </div>
-        );
     }
+    return(
+        <div className={props.loc+"SubjectContainer"}>
+            {printer}
+        </div>
+    );
 }
 
 export default SideSubject;

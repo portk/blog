@@ -9,9 +9,7 @@
 }
 
 .homeSubjectContainer{
-    display: flex;
-    align-items: initial;
-    justify-content: center;
+    text-align: center;
     width: 80vw;
     min-width: 900px;
     margin-top: 30px;
@@ -19,9 +17,10 @@
 }
 
 .home_subject {
-    margin:10px;
+    margin:20px;
     display: inline-block;
-    width: 500px;
+    vertical-align: top;
+    width: 400px;
     border-left: 1px solid grey;
     border-right: 1px solid grey;
     font-size: 25px;

@@ -20,12 +20,34 @@
     min-height: 400px;
 }
 
-.title{
-    width: 450px;
+.title, .postTitleBox{
+    width: 700px;
     text-align: initial;
+    font-size: 17px;
 }
 
 .postWriter{
     width: 150px;
     text-align: center;
+}
+
+.post_wrapper{
+    width: 800px;
+    height: 600px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.newPostContent{
+    resize: none;
+    width: 700px;
+    min-height: 200px;
+    font-size: 17px;
+}
+
+.postTitle{
+    display: flex;
 }
