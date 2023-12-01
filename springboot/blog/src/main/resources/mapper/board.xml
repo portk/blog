@@ -16,6 +16,9 @@
     <select id="selectByName" resultType="java.util.Map">
         SELECT * FROM board WHERE board_name LIKE #{name}
     </select>
+    <select id="selectBoardNSubject" resultType="java.util.Map">
+        SELECT b.*, s.subject_name From board b, subject s WHERE b.subject_id = s.subject_id
+    </select>
     <insert id="insert">
         INSERT INTO board(subject_id, writer, board_name) VALUES(#{subject},#{writer},#{name})
     </insert>

@@ -22,6 +22,9 @@
     <select id="selectPostId">
         SELECT post_id FROM post
     </select>
+    <select id="selectPostAll">
+        SELECT p.*, b.board_name, s.subject_id, s.subject_name FROM board b, subject s, post p WHERE b.board_id=p.board_id AND b.subject_id=s.subject_id
+    </select>
     <insert id="insert">
         INSERT INTO post(board_id, writer, post_title, post_context) VALUES (#{board},#{writer},#{title},#{context})
     </insert>

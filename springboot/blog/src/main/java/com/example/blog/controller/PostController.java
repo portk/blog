@@ -58,31 +58,38 @@ public class PostController {
     public List<Map<String,Object>> selectPostId(){
         return postMapper.selectPostId();
     }
+    @GetMapping("/post/select/all")
+    public List<Map<String,Object>> selectPostAll(){
+        return postMapper.selectPostAll();
+    }
 
     @GetMapping("/post/insert")
-    public void insert(
+    public String insert(
         @RequestParam String board,
         @RequestParam String writer,
         @RequestParam String title,
         @RequestParam String context
     ){
         postMapper.insert(board, writer, title, context);
+        return "게시물이 업로드 되었습니다.";
     }
 
     @GetMapping("/post/update")
-    public void update(
+    public String update(
         @RequestParam String id,
         @RequestParam String board,
         @RequestParam String title,
         @RequestParam String context
     ){
         postMapper.update(id, board, title, context);
+        return "게시물이 업데이트 되었습니다";
     }
 
     @GetMapping("/post/delete")
-    public void delete(
+    public String delete(
         @RequestParam String id
     ){
         postMapper.delete(id);
+        return "게시물이 삭제되었습니다.";
     }
 }

@@ -46,29 +46,36 @@ public class BoardController {
         name= '%'+name+'%';
         return boardMapper.selectByName(name);
     }
+    @GetMapping("boardnsubject/select")
+    public List<Map<String,Object>> selectBoardNSubject(){
+        return boardMapper.selectBoardNSubject();
+    }
 
     @GetMapping("/board/insert")
-    public void insert(
+    public String insert(
         @RequestParam String subject,
         @RequestParam String writer,
         @RequestParam String name
     ){
         boardMapper.insert(subject, writer, name);
+        return "게시판이 추가되었습니다.";
     }
 
     @GetMapping("/board/update")
-    public void update(
+    public String update(
         @RequestParam String id,
         @RequestParam String subject,
         @RequestParam String name
     ){
         boardMapper.update(id, subject, name);
+        return "게시판 정보가 수정되었습니다.";
     }
 
     @GetMapping("/board/delete")
-    public void delete(
+    public String delete(
         @RequestParam String id
     ){
         boardMapper.delete(id);
+        return "게시판이 삭제되었습니다";
     }
 }
