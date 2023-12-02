@@ -25,11 +25,11 @@
     font-size: 25px;
 }
 
-.logout {
+.logout, .newPost {
     border: none;
     border-left: 1px solid lightgrey;
     background-color: white;
     width: 80px;
     height: 50px;
-
+    cursor: pointer;
 }

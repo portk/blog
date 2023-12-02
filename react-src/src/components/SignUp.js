@@ -9,7 +9,7 @@ function SignUp(props){
         let id = document.querySelector("#userId").value;
         if(id !== "") {
             const url = baseUrl+id;
-            const ajax = await fetch(url);
+            const ajax = await fetch(url,{method:"Post"});
             const response = await ajax.json()
             if (response.length > 0){
                 alert("중복된 아이디입니다.")
@@ -37,7 +37,7 @@ function SignUp(props){
             let email = document.querySelector("#userEmail").value;
             const url = baseUrl+"id="+id+"&pw="+pw+"&nick="+nick+"&email="+email;
             if (pw !== "" && email !== ""){
-                const ajax = await fetch(url);
+                const ajax = await fetch(url,{method:"Post"});
                 const response = await ajax.text();
                 alert(response+"\n가입된 계정을 통해 로그인하세요");
                 window.location.href="/"

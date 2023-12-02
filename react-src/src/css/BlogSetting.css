@@ -18,7 +18,7 @@
 .setting_item, .settingListHeader, .ready_Subject_add, .add_ready {
     display: flex;
     width:900px;
-    justify-content: space-around;
+    justify-content: center;
 }
 .settingListHeader {
     margin-top: 10px;
@@ -38,4 +38,41 @@
 
 .add_ready{
     margin-bottom: 5px;
+}
+
+.post_setting_title{
+    cursor: pointer;
+    width: 300px;
+}
+
+.subject_setting_id{
+    width: 100px;
+}
+
+.subject_setting_name {
+    width: 400px;
+}
+.setting_buttons{
+    width: 150px;
+}
+
+.board_setting_id{
+    width: 100px;
+}
+.board_setting_subject{
+    width: 200px;
+}
+.board_setting_name{
+    width: 300px;
+}
+
+.post_setting_id{
+    width: 130;
+}
+.post_setting_board{
+    width: 200px;
+}
+
+.post_setting_dateTime{
+    width: 120px;
 }

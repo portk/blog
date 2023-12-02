@@ -4,7 +4,8 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,28 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.blog.mapper.SubjectMapper;
 
 @RestController
-@CrossOrigin(origins = "*", methods = RequestMethod.GET)
+@CrossOrigin(origins = "*", methods = RequestMethod.POST)
 public class SubjectController {
     @Autowired
     SubjectMapper subjectMapper;
 
-    @GetMapping("/subject/select")
-    public List<Map<String,Object>> select(){
-        return subjectMapper.select();
-    }
-    @GetMapping("/subject/select/id")
+    @PostMapping("/subject/select/id")
     public List<Map<String,Object>> selectById(
         @RequestParam String id
     ){
         return subjectMapper.selectById(id);
     }
-    @GetMapping("/subject/select/writer")
+    @PostMapping("/{userId}/subject/select")
     public List<Map<String,Object>> selectByWriter(
-        @RequestParam String writer
+        @PathVariable String userId
     ){
-        return subjectMapper.selectByWriter(writer);
+        return subjectMapper.selectByWriter(userId);
     }
-    @GetMapping("/subject/select/name")
+    @PostMapping("/subject/select/name")
     public List<Map<String,Object>> selectByName(
         @RequestParam String name
     ){
@@ -41,7 +38,7 @@ public class SubjectController {
         return subjectMapper.selectByName(name);
     }
 
-    @GetMapping("/subject/insert")
+    @PostMapping("/subject/insert")
     public String insert(
         @RequestParam String writer,
         @RequestParam String name
@@ -50,7 +47,7 @@ public class SubjectController {
         return "입력되었습니다.";
     }
 
-    @GetMapping("/subject/update")
+    @PostMapping("/subject/update")
     public String update(
         @RequestParam String id,
         @RequestParam String name
@@ -59,7 +56,7 @@ public class SubjectController {
         return "수정되었습니다.";
     }
 
-    @GetMapping("/subject/delete")
+    @PostMapping("/subject/delete")
     public String delete(
         @RequestParam String id
     ){

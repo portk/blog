@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.blog.mapper.BoardMapper">
-    <select id="select" resultType="java.util.Map">
-        SELECT * FROM board
-    </select>
-    <select id="selectById" resultType="java.util.Map">
-        SELECT * FROM board WHERE board_id=#{id}
-    </select>
     <select id="selectBySubject" resultType="java.util.Map">
-        SELECT * FROM board WHERE subject_id=#{subject}
+        SELECT * FROM board WHERE subject_id=#{subject} AND writer=#{userId}
     </select>
     <select id="selectByWriter" resultType="java.util.Map">
-        SELECT * FROM board WHERE writer=#{wirter}
+        SELECT * FROM board WHERE writer=#{userId}
     </select>
     <select id="selectByName" resultType="java.util.Map">
         SELECT * FROM board WHERE board_name LIKE #{name}
     </select>
     <select id="selectBoardNSubject" resultType="java.util.Map">
-        SELECT b.*, s.subject_name From board b, subject s WHERE b.subject_id = s.subject_id
+        SELECT b.*, s.subject_name From board b, subject s WHERE b.subject_id = s.subject_id AND b.writer=#{userId}
     </select>
     <insert id="insert">
         INSERT INTO board(subject_id, writer, board_name) VALUES(#{subject},#{writer},#{name})

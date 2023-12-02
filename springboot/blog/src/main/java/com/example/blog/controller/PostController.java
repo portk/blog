@@ -5,7 +5,8 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,57 +14,62 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.blog.mapper.PostMapper;
 
 @RestController
-@CrossOrigin(origins = "*", methods = RequestMethod.GET)
+@CrossOrigin(origins = "*", methods = RequestMethod.POST)
 public class PostController {
     @Autowired
     PostMapper postMapper;
     
-    @GetMapping("/post/select")
-    public List<Map<String,Object>> select(){
-        return postMapper.select();
-    }
-    @GetMapping("/post/select/id")
+    @PostMapping("/post/select/id")
     public List<Map<String,Object>> selectById(
         @RequestParam String id
     ){
         return postMapper.selectById(id);
     }
-    @GetMapping("/post/select/writer")
+    @PostMapping("/{userId}/post/select")
     public List<Map<String,Object>> selectByWriter(
-        @RequestParam String writer
+        @PathVariable String userId
     ){
-        return postMapper.selectByWriter(writer);
+        return postMapper.selectByWriter(userId);
     }
-    @GetMapping("/post/select/board")
+    @PostMapping("/{userId}/post/select/board")
     public List<Map<String,Object>> selectByBoard(
+        @PathVariable String userId,
         @RequestParam String board
     ){
-        return postMapper.selectByBoard(board);
+        return postMapper.selectByBoard(userId, board);
     }
-    @GetMapping("/post/select/title")
+    @PostMapping("/post/select/title")
     public List<Map<String,Object>> selectByTitle(
         @RequestParam String title
     ){
         title = "%"+title+"%";
         return postMapper.selectByTitle(title);
     }
-    @GetMapping("/post/select/context")
+    @PostMapping("/post/select/context")
     public List<Map<String,Object>> selectByContext(
         @RequestParam String context
     ){
         context = "%"+context+"%";
         return postMapper.selectByContext(context);
     }
-    @GetMapping("/postid/select")
+    @PostMapping("/postid/select")
     public List<Map<String,Object>> selectPostId(){
         return postMapper.selectPostId();
     }
-    @GetMapping("/post/select/all")
-    public List<Map<String,Object>> selectPostAll(){
-        return postMapper.selectPostAll();
+    @PostMapping("/{userId}/post/select/all")
+    public List<Map<String,Object>> selectPostAll(
+        @PathVariable String userId
+    ){
+        return postMapper.selectPostAll(userId);
+    }
+    @PostMapping("/post/select/all/id")
+    public List<Map<String,Object>> selectPostAllById(
+        @RequestParam String id
+    ) {
+        return postMapper.selectPostAllById(id);
     }
 
-    @GetMapping("/post/insert")
+    @PostMapping("/post/insert")
     public String insert(
         @RequestParam String board,
         @RequestParam String writer,
@@ -74,7 +80,7 @@ public class PostController {
         return "게시물이 업로드 되었습니다.";
     }
 
-    @GetMapping("/post/update")
+    @PostMapping("/post/update")
     public String update(
         @RequestParam String id,
         @RequestParam String board,
@@ -85,7 +91,7 @@ public class PostController {
         return "게시물이 업데이트 되었습니다";
     }
 
-    @GetMapping("/post/delete")
+    @PostMapping("/post/delete")
     public String delete(
         @RequestParam String id
     ){

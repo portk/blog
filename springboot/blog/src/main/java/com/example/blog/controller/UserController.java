@@ -3,38 +3,36 @@ package com.example.blog.controller;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.blog.mapper.UserMapper;
 
-import jakarta.servlet.http.HttpSession;
-
 @RestController
-@CrossOrigin(origins = "*", methods = RequestMethod.GET)
+@CrossOrigin(origins = "*", methods = RequestMethod.POST)
 public class UserController {
     @Autowired
     UserMapper userMapper;
 
-    @GetMapping("/user/select")
+    @PostMapping("/user/select")
     public List<Map<String,Object>> userSelect(){
         return userMapper.select();
     }
-    @GetMapping("/user/select/code")
+    @PostMapping("/user/select/code")
     public List<Map<String,Object>> userSelectByCode(
         @RequestParam String code
     ){
         return userMapper.selectByCode(code);
     }
-    @GetMapping("/user/select/id")
+    @PostMapping("/user/select/id")
     public List<Map<String,Object>> userSelectById(
         @RequestParam String id
     ){
         return userMapper.selectById(id);
     }
 
-    @GetMapping("/user/search/id")
+    @PostMapping("/user/search/id")
     public List<Map<String,Object>> userSearchById(
         @RequestParam String id
     ){
@@ -42,23 +40,21 @@ public class UserController {
         return userMapper.selectById(id);
     }
     
-    @GetMapping("/user/signin")
+    @PostMapping("/user/signin")
     public List<Map<String,Object>> userSearchByIdPw(
         @RequestParam String id,
-        @RequestParam String pw,
-        HttpSession session
+        @RequestParam String pw
     ){
         List<Map<String,Object>> userData;
         userData = userMapper.selectByIdPw(id, pw);
         if (userData != null){
-            session.setAttribute("loginUser", userData);
             return userData;
         } else{
             return null;
         }
     }
 
-    @GetMapping("/user/insert")
+    @PostMapping("/user/insert")
     public String userInsert(
         @RequestParam String id,
         @RequestParam String pw,
@@ -69,7 +65,7 @@ public class UserController {
         return "가입되었습니다.";
     }
 
-    @GetMapping("/user/update")
+    @PostMapping("/user/update")
     public String userUpdate(
         @RequestParam String code,
         @RequestParam String id,
@@ -81,7 +77,7 @@ public class UserController {
         return "계정 정보가 수정되었습니다.";
     }
 
-    @GetMapping("/user/delete")
+    @PostMapping("/user/delete")
     public String userDelete(
         @RequestParam String code
     ){

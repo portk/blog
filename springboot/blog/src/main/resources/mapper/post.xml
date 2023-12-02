@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.blog.mapper.PostMapper">
-    <select id="select">
-        SELECT * FROM post
-    </select>
     <select id="selectById">
         SELECT * FROM post WHERE post_id=#{id}
     </select>
     <select id="selectByWriter">
-        SELECT * FROM post WHERE writer=#{writer}
+        SELECT * FROM post WHERE writer=#{userId}
     </select>
     <select id="selectByBoard">
-        SELECT * FROM post WHERE board_id=#{board}
+        SELECT * FROM post WHERE board_id=#{board} AND writer=#{userId}
     </select>
     <select id="selectByTitle">
         SELECT * FROM post WHERE post_title LIKE #{title}
@@ -23,7 +20,10 @@
         SELECT post_id FROM post
     </select>
     <select id="selectPostAll">
-        SELECT p.*, b.board_name, s.subject_id, s.subject_name FROM board b, subject s, post p WHERE b.board_id=p.board_id AND b.subject_id=s.subject_id
+        SELECT p.*, b.board_name, s.subject_id, s.subject_name FROM board b, subject s, post p WHERE b.board_id=p.board_id AND b.subject_id=s.subject_id AND p.writer=#{userId}
+    </select>
+    <select id="selectPostAllById">
+        SELECT p.*, b.board_name, s.subject_id, s.subject_name FROM board b, subject s, post p WHERE b.board_id=p.board_id AND b.subject_id=s.subject_id AND p.post_id=#{id}
     </select>
     <insert id="insert">
         INSERT INTO post(board_id, writer, post_title, post_context) VALUES (#{board},#{writer},#{title},#{context})

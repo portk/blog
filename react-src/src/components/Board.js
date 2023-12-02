@@ -4,10 +4,11 @@ import Post from "./Post";
 function Board (props) {
 
     const [board, setBoard] = useState([])
-
+    let blogerId = window.location.href.split("/")[3];
+    
     const getBoard = async () => {
-        let url= "http:"+props.access+":8080/board/select/subject?subject="+props.subject;
-        const ajax = await fetch(url);
+        let url= "http:"+props.access+":8080/"+blogerId+"/board/select/subject?subject="+props.subject;
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.json();
         setBoard(response);
     }

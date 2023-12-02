@@ -1,10 +1,10 @@
-/* .content {
+.content {
     width: 80vw;
     min-width: 900px;
     display: flex;
-    align-items: center;
+    align-items: initial;
     justify-content: center;
-} */
+}
 
 .postTop{
     display: flex;
@@ -12,7 +12,8 @@
 }
 
 .postDetail{
-    width: 700px;
+    display: flex;
+    min-width: 700px;
 }
 
 .context{
@@ -21,9 +22,11 @@
 }
 
 .title, .postTitleBox{
-    width: 700px;
+    min-width: 700px;
     text-align: initial;
     font-size: 17px;
+    height: 30px;
+    margin: 10px 0;
 }
 
 .postWriter{
@@ -32,9 +35,8 @@
 }
 
 .post_wrapper{
-    width: 800px;
+    min-width: 800px;
     height: 600px;
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -43,11 +45,21 @@
 
 .newPostContent{
     resize: none;
-    width: 700px;
-    min-height: 200px;
+    min-width: 700px;
+    min-height: 300px;
     font-size: 17px;
+    margin-bottom: 10px;
 }
 
 .postTitle{
     display: flex;
+}
+
+.dateTime {
+    width: 120px;
+}
+
+#postSaveButton {
+    width: 120px;
+    height: 40px;
 }

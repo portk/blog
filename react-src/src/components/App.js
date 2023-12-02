@@ -23,7 +23,7 @@ function App() {
 
   const getPost= async () =>  {
     const url = "http:"+access+":8080/postid/select";
-    const ajax = await fetch(url);
+    const ajax = await fetch(url,{method:"POST"});
     const response = await ajax.json();
     setPost(response);
   }
@@ -31,14 +31,21 @@ function App() {
   useEffect(() => {
     getPost();
   },[]);
-
-  let printer=[];
+  
+  let postRead=[];
   post.forEach((item) => {
-    printer.push(
-      <Route key={item.post_id} path={"post"+item.post_id} element={<PostDetail post_id={item.post_id} access={access}/>}/>
+    postRead.push(
+      <Route key={item.post_id} path={"/post"+item.post_id} element={<PostDetail post_id={item.post_id} access={access}/>}/>
     );
   });
   
+  let postSetting=[];
+  post.forEach((item) => {
+    postSetting.push(
+      <Route key={"postSetting"+item.post_id} path={"/postdetailsetting/post"+item.post_id} element={<PostDetailSetting access={access} post_id={item.post_id}/>}/>
+    );
+  });
+
   if (sessionStorage.getItem("userCode") === null || sessionStorage.getItem("userNickname") === null){
     return (
       <Routes>
@@ -54,14 +61,15 @@ function App() {
           <Header access={access}/>
           <div className='content'>
             <Routes>
-              <Route path="/" element={<Home access={access}/>}/>
-              {printer}
-              <Route path="/accountsetting" element={<AccountSetting access={access}/>}/>
-              <Route path="/blogsetting" element={<BlogSetting access={access} />}/>
-              <Route path="/subjectsetting" element={<SubjectSetting access={access} />}/>
-              <Route path="/boardsetting" element={<BoardSetting access={access} />}/>
-              <Route path="/postsetting" element={<PostSetting access={access} />}/>
+              <Route path="/:blogerId" element={<Home access={access}/>}/>
+              {postRead}
+              <Route path="/:blogerId/accountsetting" element={<AccountSetting access={access}/>}/>
+              <Route path="/:blogerId/blogsetting" element={<BlogSetting access={access} />}/>
+              <Route path="/:blogerId/subjectsetting" element={<SubjectSetting access={access} />}/>
+              <Route path="/:blogerId/boardsetting" element={<BoardSetting access={access} />}/>
+              <Route path="/:blogerId/postsetting" element={<PostSetting access={access} />}/>
               <Route path="/PostDetailSetting" element={<PostDetailSetting access={access}/>}/>
+              {postSetting}
             </Routes>
           </div>
         </div>

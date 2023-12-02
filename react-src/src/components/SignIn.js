@@ -10,7 +10,7 @@ function SignIn (props){
         let id=document.getElementById("userId").value;
         let pw=document.getElementById("userPw").value;
         let url = checkUrl+"id="+id+"&pw="+pw
-        const ajax = await fetch(url);
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.json();
         if (response.length > 0){
             setUserInfo(response[0]);
@@ -39,11 +39,12 @@ function SignIn (props){
             </div>
         )
     } else{
-        window.sessionStorage.setItem("userCode", userInfo.code)
-        window.sessionStorage.setItem("userId", userInfo.id)
-        window.sessionStorage.setItem("userNickname", userInfo.nickname)
-        window.sessionStorage.setItem("userEmail", userInfo.email)
-        return (<App/>)
+        window.sessionStorage.setItem("userCode", userInfo.code);
+        window.sessionStorage.setItem("userId", userInfo.id);
+        window.sessionStorage.setItem("userNickname", userInfo.nickname);
+        window.sessionStorage.setItem("userEmail", userInfo.email);
+        window.location.href="/"+window.sessionStorage.userId;
+        return (<App/>);
     }
 }
 

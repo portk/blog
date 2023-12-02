@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function SubjectSetting(props){
     const [subject,setSubject] = useState([]);
+    const {blogerId} = useParams();
 
     const getSubjectList = async () => {
-        let url="http:"+props.access+":8080/subject/select";
-        const ajax = await fetch(url);
+        let url="http:"+props.access+":8080/"+blogerId+"/subject/select";
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.json();
         setSubject(response);
     }
 
     const getSubjectById = async (id,targetElement) => {
         let url="http:"+props.access+":8080/subject/select/id?id="+id
-        const ajax = await fetch(url);
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.json();
         targetElement.innerHTML = response[0].subject_name;
     }
@@ -20,16 +22,16 @@ function SubjectSetting(props){
     const deleteSubject = async (id) => {
         if(window.confirm("주제를 삭제하시겠습니까?\n\n(하위 게시판, 게시글이 모두 삭제됩니다.)")){
             let url="http:"+props.access+":8080/subject/delete?id="+id;
-            const ajax = await fetch(url);
+            const ajax = await fetch(url,{method:"Post"});
             const response = await ajax.text();
             alert(response);
-            window.location.href="/subjectsetting";
+            window.location.href="/"+blogerId+"/subjectsetting";
         }
     }
 
     const subject_update_send = async(id, value) => {
         let url="http:"+props.access+":8080/subject/update?id="+id+"&name="+value;
-        const ajax = await fetch(url);
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.text();
         alert(response);
     }
@@ -48,7 +50,7 @@ function SubjectSetting(props){
             console.log(id);
             console.log("target : "+(id-1));
             getSubjectById(id,name);
-            window.location.href="/subjectsetting";
+            window.location.href="/"+blogerId+"/subjectsetting";
         }
     }
 
@@ -74,13 +76,13 @@ function SubjectSetting(props){
         let name = document.querySelector("#createSubject").value;
         if (name !== ""){
             let url = "http:"+props.access+":8080/subject/insert?&writer="+window.sessionStorage.getItem("userId")+"&name="+name;
-            const ajax = await fetch(url);
+            const ajax = await fetch(url,{method:"Post"});
             const response = await ajax.text();
             alert(response);
         } else{
             alert("주제를 입력하세요");
         }
-        window.location.href="/subjectsetting";
+        window.location.href="/"+blogerId+"/subjectsetting";
     }
 
     useEffect(()=>{getSubjectList();
@@ -103,18 +105,23 @@ function SubjectSetting(props){
         });
     }
     
-    return (
-        <div className="subjectList">
-            <div className="settingListHeader">
-                <div>번호</div>
-                <div>주제명</div>
-                <div>관리 <button type="button" onClick={()=>{subject_create_ready()}}>추가</button></div>
+    if (blogerId === window.sessionStorage.getItem("userId")){
+        return (
+            <div className="subjectList">
+                <div className="settingListHeader">
+                    <div className="subject_setting_id">번호</div>
+                    <div className="subject_setting_name">주제명</div>
+                    <div className="setting_buttons">관리 &nbsp; <button type="button" onClick={()=>{subject_create_ready()}}>추가</button></div>
+                </div>
+                <div className="subject_add_ready add_ready"></div>
+                <hr/>
+                {printer}
             </div>
-            <div className="subject_add_ready add_ready"></div>
-            <hr/>
-            {printer}
-        </div>
-    );
+        );
+    } else{
+        alert("본인 계정인 주소만 접속할 수 있습니다");
+        window.location.href="/"+blogerId;
+    }
     
 }
 

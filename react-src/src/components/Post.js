@@ -3,10 +3,11 @@ import React, { useEffect, useState } from "react";
 function Post(props){
 
     const [post, setPost] = useState([]);
+    let blogerId = window.location.href.split("/")[3];
 
     const getPost= async () =>  {
-        const url = "http:"+props.access+":8080/post/select/board?board="+props.board;
-        const ajax = await fetch(url);
+        const url = "http:"+props.access+":8080/"+blogerId+"/post/select/board?board="+props.board;
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.json();
         setPost(response);
     }

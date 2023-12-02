@@ -1,15 +1,79 @@
-.replyItem{
+.replyHeader{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dotted rgb(133, 133, 133);
+    padding: 10px;
+}
+
+.replyItem, .subReplyItem{
     display: flex;
     align-items: center;
     margin: 5px 0;
-    border-bottom: 1px solid rgba(211, 211, 211, 0.5);
 }
 
-.replyWriter {
+.replyWriter, .subReplyWriter {
     width: 150px;
 }
 
-.replyContext{
-    width: 450px;
+.replyContext, .subReplyContext{
+    width: 430px;
     text-align: initial;
+}
+
+#replyInputContext{
+    resize: none;
+    width: 500px;
+    height: 70px;
+}
+
+#replyInputButton{
+    width: 70px;
+    height: 70px;
+}
+
+.replyInputBox {
+    margin:10px;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.reply {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.subReplyItem{
+    position: relative;
+    left: 50px;
+    font-size: 15px;
+    border-top: 1px solid rgb(190, 190, 190);
+    width: 740px;
+}
+
+.subReplyContext{
+    width: 380px;
+    text-align: initial;
+}
+
+.replyItemBox > hr{
+    border: 1px dotted rgb(207, 207, 207);
+}
+
+.subReplyInputContext {
+    resize: none;
+    width: 500px;
+}
+
+.insertSubReplyItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.subReplyInputButton{
+    margin-left: 20px;
+    width: 50px;
+    height: 30px;
 }

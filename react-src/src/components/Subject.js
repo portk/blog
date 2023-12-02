@@ -4,11 +4,14 @@ import Board from "./Board";
 function SideSubject(props) {
     
     const [subject,setSubject] = useState([])
+    let blogerId = window.location.href.split("/")[3];
 
     const getSubject = async () => { 
-        const ajax = await fetch("http:"+props.access+":8080/subject/select");
-        const response = await ajax.json();
-        setSubject(response);
+        if (blogerId != null){
+            const ajax = await fetch("http:"+props.access+":8080/"+blogerId+"/subject/select",{method:"Post"});
+            const response = await ajax.json();
+            setSubject(response);
+        }
     }
 
     useEffect(() => {
@@ -21,7 +24,7 @@ function SideSubject(props) {
     if (props.loc === "side"){
         subject.forEach(item => {
             printer.push(
-                <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer} id={props.loc+"_board_"+item.subject_id}
+                <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} id={props.loc+"_board_"+item.subject_id}
                     onClick={()=> {props.transMode("board"); window.sessionStorage.setItem("sideSubject",item.subject_id);}}>
                     {item.subject_name}
                 </div>
@@ -30,7 +33,7 @@ function SideSubject(props) {
     } else {
         subject.forEach(item => {
             printer.push(
-                <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"} writer={item.writer}>
+                <div key={item.subject_id} className={"subject_item "+props.loc+"_subject"}>
                     {item.subject_name}
                     <Board subject={item.subject_id} loc={props.loc} access={props.access}/>
                 </div>

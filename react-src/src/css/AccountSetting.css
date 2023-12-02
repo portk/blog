@@ -1,3 +1,19 @@
+.accountInfo, .accountSetting{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .account_item {
     display: flex;
+    margin: 10px 0;
+    border-bottom: 1px solid lightgray;
+    font-size: 20px;
+}
+
+.account_item_left{
+    min-width: 200px;
+}
+.account_item_Right{
+    min-width: 300px;
 }

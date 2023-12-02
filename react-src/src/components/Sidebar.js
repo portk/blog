@@ -8,7 +8,7 @@ function Sidebar(props)   {
     const [mode,setMode] = useState("subject");
 
     useEffect(()=>{
-        document.querySelector(".icon").addEventListener("click", () => { window.location.href = "/"; });
+        document.querySelector(".icon").addEventListener("click", () => { window.location.href = "/"+window.sessionStorage.getItem("userId"); });
         document.querySelector(".icon").style.backgroundImage="url('http:"+props.access+":8080/img/sideicon.png')";
     },[]);
 
@@ -23,8 +23,8 @@ function Sidebar(props)   {
                     <Board subject={window.sessionStorage.getItem("sideSubject")} loc="side" transMode={transMode} access={props.access}/>
                 </div>
                 <div className='moreSide'>
-                    <div className='userSetting'>사용자 설정</div>
-                    <div className='blogSetting'>블로그 설정</div>
+                    <div className='userSetting'>계정<br/>설정</div>
+                    <div className='blogSetting'>내<br/>블로그<br/>설정</div>
                 </div>
             </div>
         );
@@ -37,8 +37,8 @@ function Sidebar(props)   {
                     <Post board={window.sessionStorage.getItem("sideBoard")} loc="side" access={props.access}/>
                 </div>
                 <div className='moreSide'>
-                    <div className='userSetting'>사용자 설정</div>
-                    <div className='blogSetting'>블로그 설정</div>
+                    <div className='userSetting'>계정<br/>설정</div>
+                    <div className='blogSetting'>내<br/>블로그<br/>설정</div>
                 </div>
             </div>
         );
@@ -51,8 +51,8 @@ function Sidebar(props)   {
                     <Subject subjectList={props.subject} loc="side" transMode={transMode} access={props.access}/>
                 </div>
                 <div className='moreSide'>
-                    <div className='userSetting' onClick={()=>{window.location.href="/accountsetting"}}>사용자 설정</div>
-                    <div className='blogSetting' onClick={()=>{window.location.href="/blogsetting"}}>블로그 설정</div>
+                    <div className='userSetting' onClick={()=>{window.location.href="/"+window.sessionStorage.getItem("userId")+"/accountsetting"}}>사용자<br/>설정</div>
+                    <div className='blogSetting' onClick={()=>{window.location.href="/"+window.sessionStorage.getItem("userId")+"/blogsetting"}}>내<br/>블로그<br/>설정</div>
                 </div>
             </div>
         );

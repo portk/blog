@@ -28,6 +28,9 @@
     font-weight: 500;
     cursor: pointer;
 }
+.side_subject:hover{
+    background-color: lightgrey;
+}
 
 .side_board{
     font-size: 23px;
@@ -36,6 +39,9 @@
     font-weight: 500;
     cursor: pointer;
 }
+.side_board:hover{
+    background-color: lightgrey;
+}
 
 .side_post{
     font-size: 23px;
@@ -43,6 +49,9 @@
     margin: 10px 0;
     font-weight: 500;
     cursor: pointer;
+}
+.side_post:hover{
+    background-color: lightgrey;
 }
 
 .mode{
@@ -72,8 +81,16 @@
 }
 
 .moreSide > div{
-    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
     width: 90px;
     height: 70px;
     cursor: pointer;
+    font-size: 17px;
+}
+
+.moreSide > div:hover{
+    background-color: rgb(190, 240, 190);
 }

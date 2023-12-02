@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 
 
 function BoardSetting(props){
     const [board,setBoard] = useState();
     const [subject,setSubject] = useState();
+    const {blogerId} = useParams();
+
     const getBoardData = async () => {
-        let url="http:"+props.access+":8080/boardnsubject/select";
-        const ajax = await fetch(url);
+        let url="http:"+props.access+":8080/"+blogerId+"/boardnsubject/select";
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.json();
         setBoard(response);
     }
     const getSubjectList = async () => {
-        let url="http:"+props.access+":8080/subject/select";
-        const ajax = await fetch(url);
+        let url="http:"+props.access+":8080/"+blogerId+"/subject/select";
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.json();
         setSubject(response);
     }
@@ -49,10 +52,10 @@ function BoardSetting(props){
             let subject = document.querySelector("#board_subject_select").value;
             let writer = window.sessionStorage.getItem("userId");
             let url = "http:"+props.access+":8080/board/insert?subject="+subject+"&writer="+writer+"&name="+name;
-            const ajax = await fetch(url);
+            const ajax = await fetch(url,{method:"Post"});
             const response = await ajax.text();
             alert(response);
-            window.location.href="/boardsetting";
+            window.location.href="/"+blogerId+"/boardsetting";
         } else {
             alert("게시판 이름을 입력하세요!");
         }
@@ -61,10 +64,10 @@ function BoardSetting(props){
     const board_delete = async (id) => {
         if(window.confirm("정말로 게시판을 삭제하시겠습니까?\n\n(하위 게시글들이 모두 지워집니다)")) {
             let url="http:"+props.access+":8080/board/delete?id="+id;
-            const ajax = await fetch(url);
+            const ajax = await fetch(url,{method:"Post"});
             const response = await ajax.text();
             alert(response);
-            window.location.href="/boardsetting"
+            window.location.href="/"+blogerId+"/boardsetting"
         }
     }
 
@@ -84,12 +87,12 @@ function BoardSetting(props){
             let name = document.querySelector("#board_update_name").value;
             let url = "http:"+props.access+":8080/board/update?id="+id+"&name="+name+"&subject="+subject;
             board_update_send(url);
-            window.location.href="/boardsetting";
+            window.location.href="/"+blogerId+"/boardsetting";
         }
     }
 
     const board_update_send = async (url) => {
-        const ajax = await fetch(url);
+        const ajax = await fetch(url,{method:"Post"});
         const response = await ajax.text();
         alert(response);
     }
@@ -124,19 +127,24 @@ function BoardSetting(props){
         });
     }
 
-    return (
-        <div className="boardList">
-            <div className="settingListHeader">
-                <div>번호</div>
-                <div>주제명</div>
-                <div>게시판명</div>
-                <div>관리 <button type="button" onClick={()=>{board_create_ready()}}>추가</button></div>
+    if (blogerId === window.sessionStorage.getItem("userId")){
+        return (
+            <div className="boardList">
+                <div className="settingListHeader">
+                    <div className="board_setting_id">번호</div>
+                    <div className="board_setting_subject">주제명</div>
+                    <div className="board_setting_name">게시판명</div>
+                    <div className="setting_buttons">관리 &nbsp; <button type="button" onClick={()=>{board_create_ready()}}>추가</button></div>
+                </div>
+                <div className="board_add_ready add_ready"></div>
+                <hr/>
+                {printer}
             </div>
-            <div className="board_add_ready add_ready"></div>
-            <hr/>
-            {printer}
-        </div>
-    );
+        );
+    } else{
+        alert("본인 계정인 주소만 접속할 수 있습니다");
+        window.location.href="/"+blogerId;
+    }
 }
 
 export default BoardSetting;
