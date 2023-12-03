@@ -20,7 +20,7 @@ function Post(props){
     post.forEach((item) => {
         printer.push(
             <div className={"post_item "+props.loc+"_post"} key={item.post_id} id={props.loc+"_post_"+item.post_id}
-                onClick={()=>{window.location.href="/post"+item.post_id}}>
+                onClick={()=>{window.location.href="/"+blogerId+"/post"+item.post_id}}>
                 {item.post_title}
             </div>
         );

@@ -17,7 +17,7 @@
         SELECT * FROM post WHERE post_context LIKE #{context}
     </select>
     <select id="selectPostId">
-        SELECT post_id FROM post
+        SELECT post_id, writer FROM post
     </select>
     <select id="selectPostAll">
         SELECT p.*, b.board_name, s.subject_id, s.subject_name FROM board b, subject s, post p WHERE b.board_id=p.board_id AND b.subject_id=s.subject_id AND p.writer=#{userId}

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import FileUpload from "./FileUpload";
 
 function PostDetailSetting(props){
     const [subject, setSubject]=useState();
     const [board, setBoard]=useState();
     const [post, setPost]=useState();
+    const [file, setFile]=useState();
     const blogerId=window.sessionStorage.getItem("userId");
+    let writer=blogerId;
 
     const baseUrl = "http:"+props.access+":8080";
 
@@ -32,8 +35,15 @@ function PostDetailSetting(props){
         setPost(response[0]);
     };
 
+    const getFile = async () => {
+        const url = "http:"+props.access+":8080/file/select/post?post_id="+props.post_id;
+        const ajax = await fetch(url,{method:"POST"});
+        const response = await ajax.json();
+        setFile(response);
+    }
+
     useEffect(()=>{
-        getBoardData(); getSubjectData();
+        getBoardData(); getSubjectData(); getFile();
         if (props.post_id != null) {
             getPost()
         } else {
@@ -43,6 +53,7 @@ function PostDetailSetting(props){
         },[]
     )
     
+    let upload=[]
     if (post != null){
         document.querySelector(".topTitle").innerHTML=post.post_title;
         document.querySelector("#newPostTitle").value=post.post_title;
@@ -57,9 +68,11 @@ function PostDetailSetting(props){
             const ajax = await fetch(url,{method:"Post"});
             const response = await ajax.text();
             alert(response);
-            window.location.href="/post"+props.post_id;
+            window.location.href="/"+blogerId+"/post"+props.post_id;
         }
         document.querySelector("#postSaveButton").addEventListener("click",updatePost)
+        writer=post.writer;
+        upload.push(<FileUpload key={"postFileUploader"+props.post_id} access={props.access} post_id={post.post_id}/>);
     }
 
     let subjectList=[]
@@ -100,36 +113,62 @@ function PostDetailSetting(props){
         }
     }
 
-    return(
-        <div className="post_wrapper">
-            <div className="titles">
-                <div className="titleTop">
-                    <div className="postNumber"></div>
-                    <div className="postTitle">
-                        <div className="postSubjectbox">
-                            <label htmlFor="postSubjectSelect">주제 : </label>
-                            <select id="postSubjectSelect" onClick={()=>{getBoardData()}}>
-                                <option value="default">선택안함</option>
-                                {subjectList}
-                            </select>
-                        </div>
-                        <div className="postBoardbox"></div>
-                            <label htmlFor="postBoardSelect">게시판 : </label>
-                            <select id="postBoardSelect">
-                                <option value="default">선택안함</option>
-                                {boardList}
-                            </select>
-                    </div>
+    const fileDelete = async (file_id) => {
+        let url = baseUrl+"/file/delete?fileId="+file_id;
+        const ajax = await fetch(url,{method:"POST"})
+        const response = await ajax.text();
+        alert(response);
+    }
+
+    let files = []
+    if (file != null){
+        file.forEach(item => {
+            files.push(
+                <div className="fileItemSetting" key={"fileItem"+item.file_id}>
+                    {item.file_name}
+                    <button type="button" onClick={()=>{fileDelete(item.file_id)}}>파일삭제</button>
                 </div>
-                <div className="titleBottom"><input type="text" className="postTitleBox" id ="newPostTitle" placeholder="제목"/></div>
+            )
+        })
+    }
+
+    if(blogerId === writer){
+        return(
+            <div className="post_wrapper">
+                <div className="titles">
+                    <div className="titleTop">
+                        <div className="postNumber"></div>
+                        <div className="postTitle">
+                            <div className="postSubjectbox">
+                                <label htmlFor="postSubjectSelect">주제 : </label>
+                                <select id="postSubjectSelect" onClick={()=>{getBoardData()}}>
+                                    <option value="default">선택안함</option>
+                                    {subjectList}
+                                </select>
+                            </div>
+                            <div className="postBoardbox"></div>
+                                <label htmlFor="postBoardSelect">게시판 : </label>
+                                <select id="postBoardSelect">
+                                    <option value="default">선택안함</option>
+                                    {boardList}
+                                </select>
+                        </div>
+                    </div>
+                    <div className="titleBottom"><input type="text" className="postTitleBox" id ="newPostTitle" placeholder="제목"/></div>
+                </div>
+                <div className="postBody">
+                    <div className="postBodyTop"></div>
+                    <div className="postBodyMid"><textarea className="newPostContent" id="newPostContent" placeholder="본문"></textarea></div>
+                    {files}
+                    {upload}
+                    <div className="postBodyBottom"><button type="button" id="postSaveButton">저장하기</button></div>
+                </div>
             </div>
-            <div className="postBody">
-                <div className="postBodyTop"></div>
-                <div className="postBodyMid"><textarea className="newPostContent" id="newPostContent" placeholder="본문"></textarea></div>
-                <div className="postBodyBottom"><button type="button" id="postSaveButton">저장하기</button></div>
-            </div>
-        </div>
-    );
+        );
+    } else {
+        alert("작성자만 수정 가능합니다");
+        window.location.href = "/"+blogerId;
+    }
 }
 
 export default PostDetailSetting;

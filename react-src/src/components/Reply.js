@@ -4,6 +4,7 @@ import "../css/Reply.css"
 
 function Reply (props){
     const [reply, setReply] = useState([])
+    const blogerId=document.location.href.split("/")[3];
 
     const getReply = async () => {
         const url = "http:"+props.access+":8080/reply/select/post?post="+props.post;
@@ -21,7 +22,7 @@ function Reply (props){
             let baseUrl = "http:"+props.access+":8080/reply/insert?";
             let url = baseUrl+"post="+post+"&writer="+writer+"&context="+context;
             fetch(url,{method:"Post"});
-            window.location.href="/post"+props.post;
+            window.location.href="/"+blogerId+"/post"+props.post;
         } else {
             alert("내용을 입력하세요");
         }
@@ -31,7 +32,7 @@ function Reply (props){
         if (window.confirm("댓글을 삭제하시겠습니까?")){
             let url = "http:"+props.access+":8080/reply/delete?id="+id;
             fetch(url,{method:"Post"});
-            window.location.href="/post"+props.post;
+            window.location.href="/"+blogerId+"/post"+props.post;
         }
     }
 
@@ -39,7 +40,7 @@ function Reply (props){
         let context = document.querySelector("#targetReply"+id);
         let url = "http:"+props.access+":8080/reply/update?id="+id+"&context="+context.value;
         fetch(url,{method:"Post"});
-        window.location.href="/post"+props.post;
+        window.location.href="/"+blogerId+"/post"+props.post;
     }
 
     const updateReply = (id) => {
@@ -63,7 +64,7 @@ function Reply (props){
             let baseUrl = "http:"+props.access+":8080/reply/insertsub?";
             let url = baseUrl+"post="+post+"&writer="+writer+"&context="+context+"&sub_id="+sub_id;
             fetch(url,{method:"Post"});
-            window.location.href="/post"+props.post;
+            window.location.href="/"+blogerId+"/post"+props.post;
         } else {
             alert("내용을 입력하세요");
         }
@@ -104,7 +105,7 @@ function Reply (props){
                         <button type="button" onClick={()=>{deleteReply(item.reply_id)}}>삭제</button>
                     </div>
                 </div>
-                <SubReply post={props.post} reply_id={item.reply_id} access={props.access}/>
+                <SubReply post={props.post} reply_id={item.reply_id} access={props.access} blogerId={blogerId}/>
                 <div className="subReplyItems" id={"inputSubReplyBox"+item.reply_id}>
 
                 </div>

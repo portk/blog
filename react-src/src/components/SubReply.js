@@ -14,7 +14,7 @@ function SubReply (props){
         if (window.confirm("댓글을 삭제하시겠습니까?")){
             let url = "http:"+props.access+":8080/reply/delete?id="+id;
             fetch(url,{method:"Post"});
-            window.location.href="/post"+props.post;
+            window.location.href="/"+props.blogerId+"/post"+props.post;
         }
     }
 
@@ -22,7 +22,7 @@ function SubReply (props){
         let context = document.querySelector("#subReplyModifyButton"+id);
         let url = "http:"+props.access+":8080/reply/update?id="+id+"&context="+context.value;
         fetch(url,{method:"Post"});
-        window.location.href="/post"+props.post;
+        window.location.href="/"+props.blogerId+"/post"+props.post;
     }
 
     const updateReply = (id) => {

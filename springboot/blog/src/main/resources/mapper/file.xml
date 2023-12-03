@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.mapper.FileMapper">
+    <select id="selectByPost">
+        SELECT * FROM file WHERE post_id=#{postId}
+    </select>
+    <select id="selectById">
+        SELECT * FROM file WHERE file_id=#{fileId}
+    </select>
+    <insert id="insert">
+        INSERT INTO file(uuid, file_name, post_id, writer, file_size) VALUES(#{uuid},#{fileName},#{postId},#{writer},#{fileSize})
+    </insert>
+    <delete id="delete">
+        DELETE FROM file WHERE file_id=#{fileId}
+    </delete>
+</mapper>

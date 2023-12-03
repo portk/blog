@@ -4,6 +4,7 @@ import "../css/PostDetail.css";
 
 function PostDetail (props){
     const [post, setPost] = useState([]);
+    const [file, setFile] = useState([]);
     
     const getPost = async () => {
         const url = "http:"+props.access+":8080/post/select/id?id="+props.post_id;
@@ -12,12 +13,35 @@ function PostDetail (props){
         setPost(response[0]);
     };
 
+    const getFile = async () => {
+        const url = "http:"+props.access+":8080/file/select/post?post_id="+props.post_id;
+        const ajax = await fetch(url,{method:"POST"});
+        const response = await ajax.json();
+        setFile(response);
+    }
+
+    const downFile = (fileId) => {
+        const url = "http:"+props.access+":8080/file/download?fileId="+fileId;
+        window.location.href=url;
+    }
+
     useEffect(()=>{
-        getPost();
+        getPost();getFile();
     },[]);
 
     if (post != null){
         document.querySelector(".topTitle").innerHTML=post.post_title;
+    }
+
+    let files = []
+    if (file != null){
+        file.forEach(item => {
+            files.push(
+                <div className="fileItem" key={"fileItem"+item.file_id} onClick={()=>{downFile(item.file_id)}}>
+                    {item.file_name}
+                </div>
+            )
+        })
     }
 
     if(post.toString() !== ""){
@@ -33,7 +57,11 @@ function PostDetail (props){
                         </div>
                     </div>
                     <hr/>
+                    <div className="attachment">
+                        {files}
+                    </div>
                     <div className="context">{post.post_context}</div>
+                    <hr/>
                     <button type="button" onClick={()=>{window.location.href="/postdetailsetting/post"+props.post_id}}>수정하기</button>
                     <hr/>
                     <Reply post={post.post_id} access={props.access}/>

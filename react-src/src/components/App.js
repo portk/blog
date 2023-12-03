@@ -13,6 +13,7 @@ import SubjectSetting from './SubjectSetting';
 import BoardSetting from './BoardSetting';
 import PostSetting from './PostSetting';
 import PostDetailSetting from './PostDetailSetting';
+import FileUpload from './FileUpload';
 
 function App() {
   const [post, setPost] = useState([]);
@@ -35,7 +36,7 @@ function App() {
   let postRead=[];
   post.forEach((item) => {
     postRead.push(
-      <Route key={item.post_id} path={"/post"+item.post_id} element={<PostDetail post_id={item.post_id} access={access}/>}/>
+      <Route key={item.post_id} path={"/"+item.writer+"/post"+item.post_id} element={<PostDetail post_id={item.post_id} access={access}/>}/>
     );
   });
   
@@ -69,6 +70,7 @@ function App() {
               <Route path="/:blogerId/boardsetting" element={<BoardSetting access={access} />}/>
               <Route path="/:blogerId/postsetting" element={<PostSetting access={access} />}/>
               <Route path="/PostDetailSetting" element={<PostDetailSetting access={access}/>}/>
+              <Route path="/test" element={<FileUpload access={access}/>}/>
               {postSetting}
             </Routes>
           </div>

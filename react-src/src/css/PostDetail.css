@@ -63,3 +63,19 @@
     width: 120px;
     height: 40px;
 }
+
+.fileUploader {
+    min-width: 700px;
+    margin: 10px 0;
+    text-align: left;
+}
+
+.attachment{
+    text-align: right;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.fileItemSetting{
+    text-align: left;
+}
